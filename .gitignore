@@ -1,0 +1,7 @@
+runtime/
+.idea/
+.vscode/*
+log/
+test.php
+test/
+test1/

@@ -1,0 +1,22 @@
+{
+  "name": "wslibs/php-monitor-file",
+  "description": "PHP实现的网站挂马监视器",
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "songyangphp",
+      "email": "475511896@qq.com"
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "wslibs\\php_monitor_file\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0",
+    "wslibs/sendmsg": ">=0.0.1"
+  }
+}
