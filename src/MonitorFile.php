@@ -16,7 +16,11 @@ class MonitorFile
 
     public function __construct()
     {
-        MonitorFile::$_root_dir = $_SERVER['PHP_SELF'].DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
+        if(!empty($_SERVER['DOCUMENT_ROOT'])){
+            MonitorFile::$_root_dir = $_SERVER['DOCUMENT_ROOT'];
+        }else{
+            MonitorFile::$_root_dir = $_SERVER['PHP_SELF'].DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
+        }
     }
 
     public function setDirs($_dirs)
