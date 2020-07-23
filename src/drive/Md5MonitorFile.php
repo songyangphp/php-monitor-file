@@ -23,7 +23,7 @@ class Md5MonitorFile implements IMonitorFile
         $return = [];
         foreach ($dirs as $k => $v){
             if(!is_dir($v)) continue;
-            $file_list = MonitorTools::sortFiles(MonitorTools::listDirFiles($v));
+            $file_list = MonitorTools::sortFiles(MonitorTools::listDirFiles(realpath($v)));
             $log_file_name = explode(DIRECTORY_SEPARATOR,$v);
             $log_file_path = MonitorFile::$_log_dir.DIRECTORY_SEPARATOR.end($log_file_name)."_monitor_log.php";
 

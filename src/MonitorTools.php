@@ -45,6 +45,9 @@ class MonitorTools
 
         $return = [];
         foreach ($array as $k => $v){
+            if(strpos($v,'monitor_log') !== false){
+                continue;
+            }
             $return[$v] = md5_file($v);
         }
 
@@ -61,7 +64,7 @@ class MonitorTools
                     if  ($file != '.' && $file != '..') {//排除一个点和两个点
                         $file = $dir.DIRECTORY_SEPARATOR.$file;
                         if (is_dir(realpath($file))) {//如果当前是目录
-                            $arr[$file] = self::listDirFiles($file);//进一步获取该目录里的文件
+                            $arr[$file] = self::listDirFiles(realpath($file));//进一步获取该目录里的文件
                         } else {
                             $arr[] = $file;//记录文件名
                         }
@@ -103,16 +106,5 @@ class MonitorTools
         }
 
         return $change_files;
-    }
-
-    public static function apiResponse($data, $code)
-    {
-        $data = [
-            "data" => $data,
-            "code" => $code,
-            "time" => time(),
-        ];
-
-        exit(json_encode($data));
     }
 }
