@@ -33,10 +33,6 @@ class GitMonitorFile implements IMonitorFile
             }
         }
 
-        if(MonitorFile::$_send_msg_key && MonitorFile::$_phone){
-            MonitorTools::doSend($change_files, MonitorFile::$_phone);
-        }
-
         return $change_files;
     }
 }

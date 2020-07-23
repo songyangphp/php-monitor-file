@@ -3,39 +3,8 @@
 
 namespace wslibs\php_monitor_file;
 
-
-use wslibs\msg\SendMsg;
-
 class MonitorTools
 {
-    public static function initSendMsg($send_msg_sign)
-    {
-        if(empty($send_msg_sign)) return false;
-        SendMsg::setSign($send_msg_sign);
-        return true;
-    }
-
-    public static function doSend($change_files, $phone)
-    {
-        $send_msg = "";
-        foreach ($change_files as $k => $v){
-            switch ($v['type']){
-                case "change" : $type = "被篡改"; break;
-                case "add" : $type = "新增"; break;
-                case "del" : $type = "删除"; break;
-                default : $type = "未知";
-            }
-            $send_msg .= $v['file']."文件检测到".$type.",";
-        }
-
-        $send_msg = rtrim($send_msg,",");
-        if(empty($send_msg)){
-            return true;
-        }
-        SendMsg::sendOtherMsg($phone, $send_msg);
-        return true;
-    }
-
     public static function isGit()
     {
         $cmd_result = [];
@@ -134,5 +103,16 @@ class MonitorTools
         }
 
         return $change_files;
+    }
+
+    public static function apiResponse($data, $code)
+    {
+        $data = [
+            "data" => $data,
+            "code" => $code,
+            "time" => time(),
+        ];
+
+        exit(json_encode($data));
     }
 }

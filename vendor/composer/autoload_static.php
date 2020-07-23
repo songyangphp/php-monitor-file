@@ -10,7 +10,6 @@ class ComposerStaticInitca5888691483b8de0e48bd4c723a6c65
         'w' => 
         array (
             'wslibs\\php_monitor_file\\' => 24,
-            'wslibs\\msg\\' => 11,
         ),
     );
 
@@ -18,10 +17,6 @@ class ComposerStaticInitca5888691483b8de0e48bd4c723a6c65
         'wslibs\\php_monitor_file\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
-        ),
-        'wslibs\\msg\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/wslibs/sendmsg/src',
         ),
     );
 

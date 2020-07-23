@@ -11,8 +11,6 @@ class MonitorFile
 
     public static $_dirs;
     public static $_log_dir;
-    public static $_send_msg_key = null;
-    public static $_phone = null;
 
     public function __construct()
     {
@@ -37,6 +35,10 @@ class MonitorFile
 
     public function doCheck($type)
     {
+        if(isset($_POST['_ping'])){
+            echo "ping success";exit;
+        }
+
         if($type == 2 && MonitorTools::isGit()){
             $class_name = "GitMonitorFile";
         }else{
@@ -60,16 +62,11 @@ class MonitorFile
      * 启动检测
      * @param $dirs string|array 要检测的目录
      * @param $log_dir string 日志存放目录
-     * @param $type int 检测方式 1为文件加密检测法 2为利用git检测 系统会自动检测该项目是否使用git版本控制 如果不 则使用文件加密检测
-     * @param $send_msg_sign string 短信提醒中短信平台的key 如不传入则不发送短信
-     * @param $phone string 短信提醒向该手机号发送提醒短信 如不传入则不发送短信
+     * @param $type int 检测方式 1为文件加密检测法 2为利用git检测 系统会自动检测该项目是否使用git版本控制 如果不 则使用文件加密检测法
      * @return array 返回结果
      */
-    public static function start($dirs, $log_dir, $type = 1 ,$send_msg_sign = null, $phone = null)
+    public static function start($dirs, $log_dir, $type = 1)
     {
-        MonitorFile::$_send_msg_key = $send_msg_sign;
-        MonitorFile::$_phone = $phone;
-        MonitorTools::initSendMsg(MonitorFile::$_send_msg_key);
         return (new MonitorFile())->setDirs($dirs)->setLogDir($log_dir)->doCheck($type);
     }
 }

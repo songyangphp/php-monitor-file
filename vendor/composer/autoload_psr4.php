@@ -7,5 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'wslibs\\php_monitor_file\\' => array($baseDir . '/src'),
-    'wslibs\\msg\\' => array($vendorDir . '/wslibs/sendmsg/src'),
 );

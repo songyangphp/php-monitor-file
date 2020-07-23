@@ -47,10 +47,6 @@ class Md5MonitorFile implements IMonitorFile
             }
         }
 
-        if(!empty(MonitorFile::$_send_msg_key) && !empty(MonitorFile::$_phone)){
-            MonitorTools::doSend($array, MonitorFile::$_phone);
-        }
-
         return $array;
     }
 }
