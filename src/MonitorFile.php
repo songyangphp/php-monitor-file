@@ -7,6 +7,8 @@ use wslibs\php_monitor_file\i\IMonitorFile;
 
 class MonitorFile
 {
+    public static $_root_dir;
+
     public static $_dirs;
     public static $_log_dir;
     public static $_send_msg_key = null;
@@ -14,7 +16,7 @@ class MonitorFile
 
     public function __construct()
     {
-
+        MonitorFile::$_root_dir = $_SERVER['PHP_SELF'].DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
     }
 
     public function setDirs($_dirs)

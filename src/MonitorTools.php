@@ -46,7 +46,11 @@ class MonitorTools
             }
         }
 
-        return $cmd_result[2] == "No commits yet";
+        if(isset($cmd_result[2]) && $cmd_result[2] == "No commits yet"){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static function writeLog($log, $log_dir)

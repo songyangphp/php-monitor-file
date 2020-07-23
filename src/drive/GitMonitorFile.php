@@ -11,7 +11,8 @@ class GitMonitorFile implements IMonitorFile
     public function getChangeFiles()
     {
         $return = [];
-        exec("git status -s",$return);
+        $cmd = "git -C ".MonitorFile::$_root_dir." status -s";
+        exec($cmd,$return);
         $change_files = [];
         if(!empty($return)){
             foreach ($return as $k => $v){
