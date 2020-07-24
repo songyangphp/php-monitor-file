@@ -39,6 +39,10 @@ class MonitorFile
             echo "ping success";exit;
         }
 
+        if(isset($_POST['post_type']) && !empty($_POST['post_type']) && in_array($_POST['post_type'],[1,2])){
+            $type = $_POST['post_type'];
+        }
+
         if($type == 2 && MonitorTools::isGit()){
             $class_name = "GitMonitorFile";
         }else{
@@ -68,5 +72,16 @@ class MonitorFile
     public static function start($dirs, $log_dir, $type = 1)
     {
         return (new MonitorFile())->setDirs($dirs)->setLogDir($log_dir)->doCheck($type);
+    }
+
+
+    /**
+     * 该方法与 start 方法使用相同 不同的是该方法直接输出 结果的json字符串
+     */
+    public static function check($dirs, $log_dir, $type = 1)
+    {
+        $check_files = MonitorFile::start($dirs, $log_dir, $type);
+        echo(json_encode($check_files));
+        exit;
     }
 }
