@@ -66,7 +66,7 @@ class MonitorTools
                         if (is_dir(realpath($file))) {//如果当前是目录
                             $arr[$file] = self::listDirFiles(realpath($file));//进一步获取该目录里的文件
                         } else {
-                            $arr[] = $file;//记录文件名
+                            $arr[] = $file;
                         }
                     }
                 }
