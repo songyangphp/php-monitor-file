@@ -4,7 +4,6 @@ namespace wslibs\php_monitor_file\drive;
 
 use wslibs\php_monitor_file\i\IMonitorFile;
 use wslibs\php_monitor_file\MonitorFile;
-use wslibs\php_monitor_file\MonitorTools;
 
 class GitMonitorFile implements IMonitorFile
 {
@@ -22,7 +21,14 @@ class GitMonitorFile implements IMonitorFile
                         unset($b[$key]);
                     }
                 }
+
                 $b = array_values($b);
+                $file_name = explode(DIRECTORY_SEPARATOR,realpath($b[1]));
+                $file_name = end($file_name);
+                if(in_array($file_name, MonitorFile::$_ignore_file)){
+                    continue;
+                }
+
                 if($b[0] == "M"){   //文件修改
                     $change_files[] = ["type" => "change", "file" => realpath($b[1])];
                 }else if($b[0] == "??"){   //文件新增

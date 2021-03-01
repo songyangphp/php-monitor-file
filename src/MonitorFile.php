@@ -11,6 +11,7 @@ class MonitorFile
 
     public static $_dirs;
     public static $_log_dir;
+    public static $_ignore_file = [];
 
     public function __construct()
     {
@@ -30,6 +31,12 @@ class MonitorFile
     public function setLogDir($_log_dir)
     {
         MonitorFile::$_log_dir = $_log_dir;
+        return $this;
+    }
+
+    public function setIgnoreFile($_ignore_files_array)
+    {
+        MonitorFile::$_ignore_file = $_ignore_files_array;
         return $this;
     }
 
@@ -69,9 +76,9 @@ class MonitorFile
      * @param $type int 检测方式 1为文件加密检测法 2为利用git检测 系统会自动检测该项目是否使用git版本控制 如果不 则使用文件加密检测法
      * @return array 返回结果
      */
-    public static function start($dirs, $log_dir, $type = 1)
+    public static function start($dirs, $log_dir, $type = 1, $_ignore_files_array = [])
     {
-        return (new MonitorFile())->setDirs($dirs)->setLogDir($log_dir)->doCheck($type);
+        return (new MonitorFile())->setDirs($dirs)->setLogDir($log_dir)->setIgnoreFile($_ignore_files_array)->doCheck($type);
     }
 
 

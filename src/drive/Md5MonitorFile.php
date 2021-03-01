@@ -43,6 +43,11 @@ class Md5MonitorFile implements IMonitorFile
         $array = [];
         foreach ($return as $k => $v){
             foreach ($v as $value){
+                $file_name = explode(DIRECTORY_SEPARATOR,realpath($value['file']));
+                $file_name = end($file_name);
+                if(in_array($file_name, MonitorFile::$_ignore_file)){
+                    continue;
+                }
                 $array[] = $value;
             }
         }
